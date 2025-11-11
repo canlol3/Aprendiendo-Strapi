@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pokemons",
+  "info": {
+    "singularName": "pokemon",
+    "pluralName": "pokemons",
+    "displayName": "Pokemon",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "peso": {
+      "type": "decimal"
+    },
+    "attacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attack.attack",
+      "mappedBy": "pokemon"
+    }
+  }
+}

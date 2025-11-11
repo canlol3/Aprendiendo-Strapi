@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attacks",
+  "info": {
+    "singularName": "attack",
+    "pluralName": "attacks",
+    "displayName": "Attack",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "dano": {
+      "type": "decimal"
+    },
+    "pokemon": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::pokemon.pokemon",
+      "inversedBy": "attacks"
+    }
+  }
+}

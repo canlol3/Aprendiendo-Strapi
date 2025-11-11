@@ -677,6 +677,80 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAttackAttack extends Schema.CollectionType {
+  collectionName: 'attacks';
+  info: {
+    singularName: 'attack';
+    pluralName: 'attacks';
+    displayName: 'Attack';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String;
+    dano: Attribute.Decimal;
+    pokemon: Attribute.Relation<
+      'api::attack.attack',
+      'manyToOne',
+      'api::pokemon.pokemon'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::attack.attack',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::attack.attack',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPokemonPokemon extends Schema.CollectionType {
+  collectionName: 'pokemons';
+  info: {
+    singularName: 'pokemon';
+    pluralName: 'pokemons';
+    displayName: 'Pokemon';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String;
+    peso: Attribute.Decimal;
+    attacks: Attribute.Relation<
+      'api::pokemon.pokemon',
+      'oneToMany',
+      'api::attack.attack'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::pokemon.pokemon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::pokemon.pokemon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -693,6 +767,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::attack.attack': ApiAttackAttack;
+      'api::pokemon.pokemon': ApiPokemonPokemon;
     }
   }
 }
